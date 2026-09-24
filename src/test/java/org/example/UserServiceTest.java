@@ -43,4 +43,14 @@ class UserServiceTest {
         assertTrue(Math.abs(0.333333 - got.boys()) < delta);
         assertTrue(Math.abs(0.666666 - got.girls()) < delta);
     }
+
+    @org.junit.jupiter.api.BeforeEach
+    void computeGenderRatio_empty() {
+        var userService = new UserService(null);
+        var got = userService.computeGenderRatio();
+
+        assertEquals(0.0, got.boys());
+        assertEquals(0.0, got.girls());
+        assertEquals(0.0, got.unknown());
+    }
 }

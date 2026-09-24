@@ -1,5 +1,6 @@
 package org.example;
 
+import javax.xml.stream.events.EntityReference;
 import java.util.*;
 
 public class UserService {
@@ -10,6 +11,11 @@ public class UserService {
     }
 
     public GenderRatio computeGenderRatio() {
+
+        if (this.database.isEmpty()){
+            return new GenderRatio(0.0, 0.0, 0.0);
+        }
+
         int numBoys = 0, numGirls = 0, numUnknowns = 0;
         for (User u : this.database) {
             switch (u.gender()) {
