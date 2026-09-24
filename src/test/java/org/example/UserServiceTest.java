@@ -10,8 +10,8 @@ class UserServiceTest {
     private UserService userService;
 
     @org.junit.jupiter.api.BeforeEach
-    void setUp() {
-        userService = new UserService(List.of(
+    void computeGenderRatio_happyPath() {
+        var userService = new UserService(List.of(
                 new User(1L,
                         "Ferko",
                         "Velky",
@@ -34,10 +34,13 @@ class UserServiceTest {
                         User.Role.STUDENT
                         )
         ));
-    }
 
-    @org.junit.jupiter.api.Test
-    void computeGenderRatio() {
+        var got = userService.computeGenderRatio();
+        var delta = 0.00001;
+        //var означает: java сама определи тип переменной
 
+        assertEquals(0.0, got.unknown());
+        assertTrue(Math.abs(0.333333 - got.boys()) < delta);
+        assertTrue(Math.abs(0.666666 - got.girls()) < delta);
     }
 }
